@@ -1,6 +1,6 @@
 import "./App.css";
-import Card from "./component/Card";
 import Navbar from "./component/Navbar";
+import SearchBar from "./component/SearchBar";
 
 function App() {
   return (
@@ -10,10 +10,20 @@ function App() {
       </div>
 
       <div className="row">
-        <div className="col-lg-12 col-sm-12">
+        <div className="col-lg-4 col-md-4 col-sm-4"></div>
+        <div className="col-lg-4 col-md-4 col-sm-4">
+          <SearchBar></SearchBar>
+        </div>
+        <div className="col-lg-4 col-md-4 col-sm-4"></div>
+      </div>
+
+      {/* <div className="row mt-5">
+        <div className="col-lg-4 col-md-4 col-sm-4"></div>
+        <div className="col-lg-4 col-md-4 col-sm-4">
           <Card></Card>
         </div>
-      </div>
+        <div className="col-lg-4 col-md-4 col-sm-4"></div>
+      </div> */}
     </div>
   );
 }
