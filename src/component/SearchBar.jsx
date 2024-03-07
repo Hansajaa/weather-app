@@ -1,11 +1,9 @@
-import { React } from "react";
-import Card, { setLocation } from "./Card";
+import { React, useState } from "react";
+import Card from "./Card";
 import "./SearchBar.css";
 
 function SearchBar() {
-  function parseLocation(value) {
-    setLocation(value);
-  }
+  const [value,setValue] = useState("Colombo");
 
   return (
     <div className="container">
@@ -14,13 +12,16 @@ function SearchBar() {
           <div className="form-outline">
             <input style={{borderRadius:'40px'}} type="search" placeholder="Search City..." id="form1" className="form-control" />
           </div>
-          <button style={{borderRadius:'40px',marginLeft:'20%'}} type="button" className="btn btn-primary search-btn">
+          <button style={{borderRadius:'40px',marginLeft:'20%'}} type="button" className="btn btn-primary search-btn" onClick={()=>{
+            setValue(document.getElementById('form1').value)
+          }}>
             <i className="bi bi-search"></i>
           </button>
         </div>
       </div>
+
       <div className="row mt-5">
-        <Card></Card>
+        <Card value={value}></Card>
       </div>
     </div>
   );

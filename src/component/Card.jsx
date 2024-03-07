@@ -1,27 +1,52 @@
-import {useState} from 'react'
+import { useState, useEffect } from "react";
 import "./Card.css";
 
 function Card(props) {
   
-    const [city, setCity] = useState("Colombo");
+  let city = props.value;
 
-//   useEffect(() => {
-//     fetch(` http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`)
-//       .then((response) => response.json)
-//       .then((data) => {
-//         console.log(data);
-//       });
-//   }, [city]);
+  const initial = {
+    location:{
+      name:'',
+      region:'',
+      country:''
+    },
+    current:{
+      temp_c:'',
+      temp_f:'',
+      condition:{
+        text:'',
+        icon:''
+      }
+    }
+  }
 
-//   const apiKey = "5ffcc797bd1c4bc4b3730517242502";
+  const [data, setdata] = useState(initial);
 
-    
+
+  //console.log(props.value);
+
+  const apiKey = "5ffcc797bd1c4bc4b3730517242502";
+
+  useEffect(() => {
+    try{
+      fetch(` http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`)
+      .then((response) => response.json())
+      .then((data) => {
+          setdata(data);
+          console.log(data);
+      });
+    }catch(err){
+        city='colombo';
+    }
+  }, [city]);
+
 
   return (
     <div className="container mb-5">
       <div
         className="weather-card"
-        style={{ width: "20rem", height: "25rem", borderRadius: "30px" }}
+        style={{ width: "25rem", height: "33rem", borderRadius: "30px" }}
       >
         <div className="card-body">
           <div className="container">
@@ -33,13 +58,13 @@ function Card(props) {
 
             <div className="row">
               <div className="text-center mt-3">
-                <img src="../../public/day/299.png" alt="" width={120} />
+                <img src={data.current.condition.icon} alt="" width={120} />
               </div>
             </div>
 
             <div className="row">
               <h5 className="card-title text-center" style={{ color: "white" }}>
-                Partly cloudy
+                {data.current.condition.text}
               </h5>
             </div>
 
@@ -48,7 +73,14 @@ function Card(props) {
                 className="card-text text-center"
                 style={{ color: "white", fontSize: "80px" }}
               >
-                25 &#8451;
+                {data.current.temp_c} &#8451;
+              </h1>
+
+              <h1
+                className="card-text text-center"
+                style={{ color: "white", fontSize: "80px" }}
+              >
+                {data.current.temp_f} &#8457;
               </h1>
             </div>
 
@@ -59,7 +91,7 @@ function Card(props) {
                 <img src="../../public/location-icon.png" alt="location-icon" />
               </div>
               <div className="col">
-                <p>Battaramulla South, Western</p>
+                <p>{data.location.name}, {data.location.region}, {data.location.country}</p>
               </div>
             </div>
 
@@ -79,8 +111,3 @@ function Card(props) {
 }
 
 export default Card;
-
-
-export function setLocation(value) {
-    console.log(value);
-}
