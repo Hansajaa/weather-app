@@ -88,7 +88,7 @@ function Card(props) {
 
             <div className="row">
               <div className="col-3">
-                <img src="../../public/location-icon.png" alt="location-icon" />
+                <img src="public/location-icon.png" alt="location-icon" />
               </div>
               <div className="col">
                 <p>{data.location.name}, {data.location.region}, {data.location.country}</p>
