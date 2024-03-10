@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <div>
       <div className="container mb-5 ">
-        <nav className="navbar navbar-expand-lg bg-transparent">
+        <nav className="navbar navbar-expand-lg bg-transparent flex-column">
           <div className="container-fluid">
             <a className="navbar-brand" href="#" style={{color:"white"}}>
               <img src="../../public/logo.png" height={50} alt="" />
@@ -20,7 +20,7 @@ function Navbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="collapse navbar-collapse flex-row" id="navbarNav">
               <ul className="nav mx-auto">
                 <li className="nav-item">
                   <a className="nav-link" aria-current="page" href="#" style={{color:"white"}}>
