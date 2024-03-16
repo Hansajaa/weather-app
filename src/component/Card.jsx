@@ -5,32 +5,13 @@ function Card(props) {
   
   let city = props.value;
 
-  const initial = {
-    location:{
-      name:'',
-      region:'',
-      country:''
-    },
-    current:{
-      temp_c:'',
-      temp_f:'',
-      condition:{
-        text:'',
-        icon:''
-      }
-    }
-  }
-
-  const [data, setdata] = useState(initial);
-
-
-  //console.log(props.value);
+  const [data, setdata] = useState(null);
 
   const apiKey = "5ffcc797bd1c4bc4b3730517242502";
 
   useEffect(() => {
     try{
-      fetch(` http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`)
+      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`)
       .then((response) => response.json())
       .then((data) => {
           setdata(data);
@@ -58,13 +39,13 @@ function Card(props) {
 
             <div className="row">
               <div className="text-center mt-3">
-                <img src={data.current.condition.icon} alt="" width={120} />
+                <img src={data?.current.condition.icon} alt="" width={120} />
               </div>
             </div>
 
             <div className="row">
               <h5 className="card-title text-center" style={{ color: "white" }}>
-                {data.current.condition.text}
+                {data?.current.condition.text}
               </h5>
             </div>
 
@@ -73,14 +54,14 @@ function Card(props) {
                 className="card-text text-center"
                 style={{ color: "white", fontSize: "80px" }}
               >
-                {data.current.temp_c} &#8451;
+                {data?.current.temp_c} &#8451;
               </h1>
 
               <h1
                 className="card-text text-center"
                 style={{ color: "white", fontSize: "80px" }}
               >
-                {data.current.temp_f} &#8457;
+                {data?.current.temp_f} &#8457;
               </h1>
             </div>
 
@@ -91,7 +72,7 @@ function Card(props) {
                 <img src="public/location-icon.png" alt="location-icon" />
               </div>
               <div className="col">
-                <p>{data.location.name}, {data.location.region}, {data.location.country}</p>
+                <p>{data?.location.name}, {data?.location.region}, {data?.location.country}</p>
               </div>
             </div>
 
